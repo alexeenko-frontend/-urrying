@@ -1,0 +1,31 @@
+<!-- 
+  Написать функцию sum(), которая будет работать как калькулятор: 
+  sum(1)() // 1
+  sum(1)(2)() // 3 
+  sum(1)(2)(-1)() // 2 
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Currying</title>
+  </head>
+  <body>
+    <script>
+      function sum(element, amount) {
+        element = element ? parseInt(element) : 0;
+
+        amount = amount === undefined ? element : amount + element;
+
+        return function(...args) {
+          return args[0] === undefined ? amount : sum(args, amount);
+        };
+      }
+
+      console.log(sum(3)(8)());
+      console.log(sum(1)(2)(-7)());
+      console.log(sum(12)(8)(10)(5)());
+    </script>
+  </body>
+</html>
